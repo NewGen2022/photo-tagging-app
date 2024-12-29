@@ -1,13 +1,27 @@
+import { useTheme } from '../../hooks/useTheme.js';
+
 const Footer = () => {
+    const { theme } = useTheme();
+
     return (
-        <footer className="flex items-center justify-center bg-slate-700 py-3">
+        <footer
+            className={`flex items-center justify-center py-3 ${
+                theme === 'dark' ? ' bg-slate-700' : ' bg-slate-200'
+            } `}
+        >
             <a
                 href="https://github.com/NewGen2022?tab=repositories"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1 group transition-all hover:text-white"
+                className="flex items-center justify-center gap-1 group transition-all"
             >
-                <span className="cursor-pointer font-bold duration-500">
+                <span
+                    className={`cursor-pointer font-bold duration-500 ${
+                        theme === 'dark'
+                            ? 'hover:text-white'
+                            : 'text-slate-600 hover:text-black'
+                    } `}
+                >
                     NewGen2022
                 </span>
 
