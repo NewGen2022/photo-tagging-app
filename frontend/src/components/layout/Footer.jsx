@@ -28,7 +28,7 @@ const Footer = () => {
                 <img
                     src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                     alt="GitHub Logo"
-                    className="w-6 h-6 rounded-full duration-700 group-hover:scale-110 group-hover:rotate-360"
+                    className="w-6 h-6 rounded-full duration-700 group-hover:scale-110 group-hover:rotate-360 transition-transform"
                 />
             </a>
         </footer>
