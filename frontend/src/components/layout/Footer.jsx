@@ -5,7 +5,7 @@ const Footer = () => {
 
     return (
         <footer
-            className={`flex items-center justify-center py-3 ${
+            className={`flex items-center justify-center py-3 transition-all ease-in-out duration-300 ${
                 theme === 'dark' ? ' bg-slate-700' : ' bg-slate-200'
             } `}
         >
@@ -18,8 +18,8 @@ const Footer = () => {
                 <span
                     className={`cursor-pointer font-bold duration-500 ${
                         theme === 'dark'
-                            ? 'hover:text-white'
-                            : 'text-slate-600 hover:text-black'
+                            ? 'group-hover:text-white'
+                            : 'text-slate-600 group-hover:text-black'
                     } `}
                 >
                     NewGen2022
@@ -28,7 +28,7 @@ const Footer = () => {
                 <img
                     src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                     alt="GitHub Logo"
-                    className="w-6 h-6 rounded-full duration-700 group-hover:scale-110 group-hover:rotate-360 transition-transform"
+                    className="w-6 h-6 rounded-full group-hover:scale-110 group-hover:rotate-360 transition-transform duration-700"
                 />
             </a>
         </footer>
