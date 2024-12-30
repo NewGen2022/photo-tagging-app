@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-    * {
-        @apply transition-colors ease-in-out duration-300;
-    }
-
     #root {
         @apply h-screen bg-slate-900 text-slate-300;
     }
