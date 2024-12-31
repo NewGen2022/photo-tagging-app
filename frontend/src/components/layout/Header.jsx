@@ -34,10 +34,10 @@ const Header = () => {
             <div className="flex items-center gap-5 max-sm:flex-col max-sm:gap-4">
                 <a
                     href="/leaderboard"
-                    className={`font-semibold  transition-colors ease-in-out duration-300 ${
+                    className={`font-semibold  transition-all ease-in-out duration-500 px-3 py-2 rounded-md ${
                         theme === 'dark'
-                            ? 'hover:text-white'
-                            : 'text-slate-600 hover:text-black'
+                            ? 'hover:text-white hover:bg-slate-800'
+                            : 'text-slate-600 hover:text-black hover:bg-slate-50 hover:shadow-md hover:shadow-slate-800'
                     }`}
                 >
                     Leaderboard
