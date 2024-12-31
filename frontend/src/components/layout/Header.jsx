@@ -1,6 +1,6 @@
-import { useTheme } from '../../hooks/useTheme.js';
 import moonIcon from '../../assets/icons/night.png';
 import sunIcon from '../../assets/icons/sun.png';
+import useTheme from '../../hooks/useTheme';
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();
