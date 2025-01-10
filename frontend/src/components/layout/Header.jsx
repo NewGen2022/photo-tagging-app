@@ -1,9 +1,11 @@
 import moonIcon from '../../assets/icons/night.png';
 import sunIcon from '../../assets/icons/sun.png';
 import useTheme from '../../hooks/useTheme';
+import useGame from '../../hooks/useGame';
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();
+    const { isGame } = useGame();
 
     return (
         <div
@@ -32,16 +34,20 @@ const Header = () => {
                 </div>
             </a>
             <div className="flex items-center gap-5 max-sm:flex-col max-sm:gap-4">
-                <a
-                    href="/leaderboard"
-                    className={`font-semibold  transition-all ease-in-out duration-500 px-3 py-2 rounded-md ${
-                        theme === 'dark'
-                            ? 'hover:text-white hover:bg-slate-800'
-                            : 'text-slate-600 hover:text-black hover:bg-slate-50 hover:shadow-md hover:shadow-slate-800'
-                    }`}
-                >
-                    Leaderboard
-                </a>
+                {!isGame ? (
+                    <a
+                        href="/leaderboard"
+                        className={`font-semibold  transition-all ease-in-out duration-500 px-3 py-2 rounded-md ${
+                            theme === 'dark'
+                                ? 'hover:text-white hover:bg-slate-800'
+                                : 'text-slate-600 hover:text-black hover:bg-slate-50 hover:shadow-md hover:shadow-slate-800'
+                        }`}
+                    >
+                        Leaderboard
+                    </a>
+                ) : (
+                    'Characters'
+                )}
 
                 <div
                     onClick={toggleTheme}
