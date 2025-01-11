@@ -5,26 +5,23 @@ import { useParams } from 'react-router-dom';
 import gamesData from '../gameData';
 
 const Game = () => {
-    const { changeIsGame } = useGame();
+    const { changeIsGame, setGameCharacters } = useGame();
     const { gameId } = useParams();
 
     const game = gamesData.find((game) => game.id === gameId);
 
     useEffect(() => {
         if (game) {
-            localStorage.setItem(
-                'gameCharacters',
-                JSON.stringify(game.characters)
-            );
+            setGameCharacters(game.characters);
         }
 
         changeIsGame(true);
 
         return () => {
             changeIsGame(false);
-            localStorage.removeItem('gameCharacters');
+            setGameCharacters([]);
         };
-    }, [changeIsGame, game]);
+    }, [changeIsGame, game, setGameCharacters]);
 
     return (
         <Layout>

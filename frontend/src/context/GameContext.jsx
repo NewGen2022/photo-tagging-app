@@ -1,14 +1,18 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import useGameUpdate from '../hooks/useGameUpdate';
 
 const GameContext = createContext();
 
 const GameProvider = ({ children }) => {
-    const { isGame, changeIsGame } = useGameUpdate();
+    const [isGame, setIsGame] = useState(false);
+    const [gameCharacters, setGameCharacters] = useState([]);
+
+    const changeIsGame = (value) => setIsGame(value);
 
     return (
-        <GameContext.Provider value={{ isGame, changeIsGame }}>
+        <GameContext.Provider
+            value={{ isGame, changeIsGame, gameCharacters, setGameCharacters }}
+        >
             {children}
         </GameContext.Provider>
     );

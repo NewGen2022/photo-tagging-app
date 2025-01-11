@@ -2,29 +2,14 @@ import moonIcon from '../../assets/icons/night.png';
 import sunIcon from '../../assets/icons/sun.png';
 import useTheme from '../../hooks/useTheme';
 import useGame from '../../hooks/useGame';
-import { useState, useEffect } from 'react';
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();
-    const { isGame } = useGame();
-
-    const [characters, setCharacters] = useState([]);
-
-    useEffect(() => {
-        const storedCharacters = JSON.parse(
-            localStorage.getItem('gameCharacters')
-        );
-
-        if (storedCharacters) {
-            setCharacters(storedCharacters);
-        }
-    }, []);
-
-    console.log(characters);
+    const { isGame, gameCharacters } = useGame();
 
     return (
         <div
-            className={`flex items-center place-content-between px-16 min-h-16 transition-colors ease-in-out duration-300 ${
+            className={`sticky top-0 flex items-center place-content-between px-16 min-h-16 transition-colors ease-in-out duration-300 ${
                 theme === 'dark' ? 'bg-slate-700' : 'bg-slate-200'
             } max-sm:flex-col max-sm:py-4 max-sm:gap-4`}
         >
@@ -61,9 +46,9 @@ const Header = () => {
                         Leaderboard
                     </a>
                 ) : (
-                    characters.length > 0 && (
+                    gameCharacters.length > 0 && (
                         <div className="flex w-full gap-2">
-                            {characters.map((character) => (
+                            {gameCharacters.map((character) => (
                                 <div
                                     key={character.name}
                                     className="text-center flex items-center gap-1 max-sm:flex-col"
