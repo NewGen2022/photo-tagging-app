@@ -1,7 +1,7 @@
 import Layout from '../components/layout/Layout';
 import GameCard from '../components/GameCard';
-import gameImg1 from '../assets/games/game_1.jfif';
 import useTheme from '../hooks/useTheme';
+import gamesData from '../gameData';
 
 const Home = () => {
     const { theme } = useTheme();
@@ -17,11 +17,18 @@ const Home = () => {
                     Games
                 </h1>
                 <div className="flex flex-wrap justify-center gap-5 mb-10">
-                    <GameCard
-                        src={gameImg1}
-                        name={"Dragon Charmer's Island"}
-                        gameId={'1'}
-                    />
+                    {Object.keys(gamesData).map((gameId) => {
+                        const game = gamesData[gameId];
+
+                        return (
+                            <GameCard
+                                key={gameId}
+                                src={game.image}
+                                name={game.name}
+                                gameId={game.id}
+                            />
+                        );
+                    })}
                 </div>
             </div>
         </Layout>
