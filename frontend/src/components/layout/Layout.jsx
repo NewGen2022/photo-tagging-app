@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
     const { theme } = useTheme();
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen text-center">
             <Header />
 
             <main
