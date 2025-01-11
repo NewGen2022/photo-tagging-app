@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import useTheme from '../hooks/useTheme';
+import { Link } from 'react-router-dom';
 
 const GameCard = ({ src, name, gameId }) => {
     const { theme } = useTheme();
@@ -24,12 +25,12 @@ const GameCard = ({ src, name, gameId }) => {
             >
                 {name || 'No name'}
             </h3>
-            <a
-                href={`/game/${gameId}`}
+            <Link
+                to={`/game/${gameId}`}
                 className="m-3 px-6 py-2 bg-cyan-500 text-white font-semibold rounded-md hover:bg-cyan-400 transition-colors ease-in-out duration-300"
             >
                 Start
-            </a>
+            </Link>
         </div>
     );
 };
