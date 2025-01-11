@@ -1,8 +1,15 @@
 import PropTypes from 'prop-types';
+import useTheme from '../hooks/useTheme';
 
 const GameCard = ({ src, name, gameId }) => {
+    const { theme } = useTheme();
+
     return (
-        <div className="flex flex-col items-center bg-slate-700 rounded-lg hover:shadow-lg hover:shadow-cyan-200 transition-shadow duration-300">
+        <div
+            className={`flex flex-col items-center ${
+                theme === 'dark' ? 'bg-slate-700' : 'bg-slate-100'
+            }  rounded-lg hover:shadow-lg hover:shadow-cyan-200 transition-all ease-in-out duration-300`}
+        >
             <div className="w-80 h-60">
                 <img
                     src={src}
@@ -10,7 +17,11 @@ const GameCard = ({ src, name, gameId }) => {
                     className="w-full h-full object-top object-cover rounded-md"
                 />
             </div>
-            <h3 className="mt-3 font-semibold text-slate-50">
+            <h3
+                className={`mt-3 font-semibold  ${
+                    theme === 'dark' ? 'text-slate-50' : 'text-slate-600'
+                } transition-colors ease-in-out duration-300`}
+            >
                 {name || 'No name'}
             </h3>
             <a
