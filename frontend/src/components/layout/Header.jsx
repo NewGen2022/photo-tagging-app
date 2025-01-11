@@ -2,10 +2,25 @@ import moonIcon from '../../assets/icons/night.png';
 import sunIcon from '../../assets/icons/sun.png';
 import useTheme from '../../hooks/useTheme';
 import useGame from '../../hooks/useGame';
+import { useState, useEffect } from 'react';
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();
     const { isGame } = useGame();
+
+    const [characters, setCharacters] = useState([]);
+
+    useEffect(() => {
+        const storedCharacters = JSON.parse(
+            localStorage.getItem('gameCharacters')
+        );
+
+        if (storedCharacters) {
+            setCharacters(storedCharacters);
+        }
+    }, []);
+
+    console.log(characters);
 
     return (
         <div
@@ -37,7 +52,7 @@ const Header = () => {
                 {!isGame ? (
                     <a
                         href="/leaderboard"
-                        className={`font-semibold  transition-all ease-in-out duration-500 px-3 py-2 rounded-md ${
+                        className={`font-semibold transition-all ease-in-out duration-500 px-3 py-2 rounded-md ${
                             theme === 'dark'
                                 ? 'hover:text-white hover:bg-slate-800'
                                 : 'text-slate-600 hover:text-black hover:bg-slate-50 hover:shadow-md hover:shadow-slate-800'
@@ -46,7 +61,30 @@ const Header = () => {
                         Leaderboard
                     </a>
                 ) : (
-                    'Characters'
+                    characters.length > 0 && (
+                        <div className="flex w-full gap-2">
+                            {characters.map((character) => (
+                                <div
+                                    key={character.name}
+                                    className="text-center flex items-center gap-1 max-sm:flex-col"
+                                >
+                                    <img
+                                        src={character.image}
+                                        alt={character.name}
+                                        className="w-[40px] h-[40px] rounded-md transform transition-transform duration-300 hover:scale-105"
+                                    />
+                                    <div
+                                        className={`${
+                                            theme === 'light' &&
+                                            'text-slate-600 font-medium'
+                                        } transition-colors ease-in-out duration-300`}
+                                    >
+                                        {character.name}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )
                 )}
 
                 <div
