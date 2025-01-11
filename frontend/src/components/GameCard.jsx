@@ -8,7 +8,9 @@ const GameCard = ({ src, name, gameId }) => {
     return (
         <div
             className={`flex flex-col items-center ${
-                theme === 'dark' ? 'bg-slate-700' : 'bg-slate-100'
+                theme === 'dark'
+                    ? 'bg-slate-700'
+                    : 'bg-slate-100 hover:shadow-cyan-500'
             }  rounded-lg hover:shadow-lg hover:shadow-cyan-200 transition-all ease-in-out duration-300`}
         >
             <div className="w-80 h-60">
