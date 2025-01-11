@@ -1,12 +1,21 @@
 import { createContext } from 'react';
 import PropTypes from 'prop-types';
-import useThemeUpdate from '../hooks/useThemeUpdate';
+import { useState, useEffect } from 'react';
 
-// Create the ThemeContext
 const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
-    const { theme, toggleTheme } = useThemeUpdate();
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const [theme, setTheme] = useState(savedTheme);
+
+    const toggleTheme = () => {
+        const newTheme = theme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+    };
+
+    useEffect(() => {
+        localStorage.setItem('theme', theme);
+    }, [theme]);
 
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
