@@ -5,7 +5,7 @@ const Footer = () => {
 
     return (
         <footer
-            className={`flex items-center justify-center py-3 transition-all ease-in-out duration-300 ${
+            className={`z-50 flex items-center justify-center py-3 transition-all ease-in-out duration-300 ${
                 theme === 'dark' ? ' bg-slate-700' : ' bg-slate-200'
             } `}
         >

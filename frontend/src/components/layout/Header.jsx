@@ -9,7 +9,7 @@ const Header = () => {
 
     return (
         <div
-            className={`sticky top-0 flex items-center place-content-between px-16 min-h-16 transition-colors ease-in-out duration-300 ${
+            className={`z-50 sticky top-0 flex items-center place-content-between px-16 min-h-16 transition-colors ease-in-out duration-300 ${
                 theme === 'dark' ? 'bg-slate-700' : 'bg-slate-200'
             } max-sm:flex-col max-sm:py-4 max-sm:gap-4`}
         >
