@@ -2,10 +2,12 @@ import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { placeItem } from '../js/handlePosition';
 
+// circle component, appears when user clicks on the screen
 const Circle = ({ coordinates, imgRef }) => {
     const circleRef = useRef(null);
 
     useEffect(() => {
+        // places circle at the position where user clicked
         placeItem(circleRef, imgRef, coordinates);
     }, [coordinates, imgRef]);
 
