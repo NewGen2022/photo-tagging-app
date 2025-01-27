@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
-import { placeItem } from '../js/handlePosition';
+import { placeItem, moveItem } from '../js/handlePosition';
 
 const CharactersDisplay = ({ characters, coordinates, imgRef }) => {
     const charactersRef = useRef(null);
     const [isVisible, setIsVisible] = useState(true);
+    const [characterBoardPosition, setCharacterBoardPosition] = useState({
+        translateX: 'translate-x-5',
+        translateY: 'translate-y-0',
+    });
     const initialScrollPosition = useRef(0);
     const TOLERANCE = 12;
 
@@ -26,6 +30,7 @@ const CharactersDisplay = ({ characters, coordinates, imgRef }) => {
         initialScrollPosition.current = window.scrollY;
     };
 
+    // handles user click on the characters that is not find yet
     const handleCharacterClick = (e) => {
         const characterName = e.target
             .closest('div')
@@ -38,25 +43,30 @@ const CharactersDisplay = ({ characters, coordinates, imgRef }) => {
     };
 
     useEffect(() => {
-        placeItem(charactersRef, imgRef, coordinates);
+        if (charactersRef.current && imgRef.current) {
+            // places not founded characters at the position near circle
+            placeItem(charactersRef, imgRef, coordinates);
+            // moves character board to the convenient place to display correctly
+            moveItem(
+                charactersRef,
+                imgRef,
+                coordinates,
+                setCharacterBoardPosition
+            );
+        }
     }, [coordinates, imgRef]);
 
     useEffect(() => {
-        console.log(initialScrollPosition.current);
-
         window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
         isVisible && (
             <div
                 ref={charactersRef}
-                className="absolute flex flex-col gap-1 bg-slate-700 p-4 translate-x-5 w-40 rounded-tl-lg
-                rounded-xl opacity-90 transition-all ease-in-out duration-300"
+                className={`absolute flex flex-col gap-1 bg-slate-700 p-4 ${characterBoardPosition.translateX} ${characterBoardPosition.translateY} w-40 rounded-tl-lg
+                rounded-xl opacity-90 transition-all ease-in-out duration-300`}
             >
                 {characters.map((character) => (
                     <div
