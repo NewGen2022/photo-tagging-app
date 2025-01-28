@@ -1,27 +1,34 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
+import useGame from '../../hooks/useGame';
 import { formatTime } from '../../js/time';
 
-const StopWatch = ({ isGame, theme }) => {
-    const [elapsedTime, setElapsedTime] = useState(0);
+const StopWatch = ({ theme }) => {
+    const { isGame, gameTime, updateGameTime } = useGame(); // Access context
+    const [elapsedTime, setElapsedTime] = useState(gameTime); // Sync with gameTime from context
 
     // Start the timer automatically when isGame is true
     useEffect(() => {
         if (isGame) {
             const timerID = setInterval(() => {
-                setElapsedTime((prevTime) => prevTime + 1);
+                setElapsedTime((prevTime) => {
+                    const newTime = prevTime + 1;
+                    return newTime; // Update the local state first
+                });
             }, 1000);
 
-            // when the game is over (isGame becomes false)
-            // pass time to the time context
+            // Update gameTime in context when elapsedTime changes
+            const timeInterval = setInterval(() => {
+                updateGameTime(elapsedTime); // Update context with elapsedTime
+            }, 1000);
+
+            // Clean up the interval and log time when the game ends
             return () => {
                 clearInterval(timerID);
-                if (!isGame) {
-                    console.log('Time:', formatTime(elapsedTime)); // Log the final time when the game ends
-                }
+                clearInterval(timeInterval); // Clear context update interval
             };
         }
-    }, [isGame, elapsedTime]);
+    }, [isGame, elapsedTime, updateGameTime]);
 
     return (
         <div
@@ -35,7 +42,6 @@ const StopWatch = ({ isGame, theme }) => {
 };
 
 StopWatch.propTypes = {
-    isGame: PropTypes.bool.isRequired,
     theme: PropTypes.string.isRequired,
 };
 
