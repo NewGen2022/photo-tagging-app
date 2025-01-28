@@ -35,7 +35,7 @@ const Game = () => {
             changeIsGame(false);
             setGameCharacters([]);
         };
-    }, [changeIsGame, game, setGameCharacters]);
+    }, [game, setGameCharacters]);
 
     return (
         <Layout>
