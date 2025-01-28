@@ -39,7 +39,7 @@ const Header = () => {
             </a>
 
             {/* Stop watch */}
-            {isGame && <StopWatch isGame={isGame} theme={theme} />}
+            {isGame && <StopWatch theme={theme} />}
 
             {/* leaderboard/game characters and toggle theme button container */}
             <div className="flex items-center gap-5 max-sm:flex-col max-sm:gap-4">
