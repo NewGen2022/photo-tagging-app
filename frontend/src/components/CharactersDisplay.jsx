@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 import { placeItem, moveItem } from '../js/handlePosition';
+import useTheme from '../hooks/useTheme';
 
 const CharactersDisplay = ({ characters, coordinates, imgRef }) => {
+    const { theme } = useTheme();
     const charactersRef = useRef(null);
     const [isVisible, setIsVisible] = useState(true);
     const [characterBoardPosition, setCharacterBoardPosition] = useState({
@@ -65,14 +67,24 @@ const CharactersDisplay = ({ characters, coordinates, imgRef }) => {
         isVisible && (
             <div
                 ref={charactersRef}
-                className={`absolute flex flex-col gap-1 bg-slate-700 p-4 ${characterBoardPosition.translateX} ${characterBoardPosition.translateY} w-40 rounded-tl-lg
-                rounded-xl opacity-90 transition-all ease-in-out duration-300`}
+                className={`absolute flex flex-col gap-1 font-medium ${
+                    theme === 'dark' ? 'bg-slate-700' : 'bg-slate-200'
+                }
+                p-4 ${characterBoardPosition.translateX} ${
+                    characterBoardPosition.translateY
+                } 
+                w-40 rounded-tl-lg rounded-xl opacity-90 transition-all ease-in-out duration-300`}
             >
                 {characters.map((character) => (
                     <div
                         key={character.name}
-                        className="group flex justify-left items-center gap-1 cursor-pointer rounded-xl 
-                        hover:font-bold hover:text-slate-700 hover:bg-slate-100 transition-all ease-in-out duration-300"
+                        className={`group flex justify-left items-center gap-1 cursor-pointer rounded-xl 
+                        hover:font-bold ${
+                            theme === 'dark'
+                                ? 'hover:text-slate-700 hover:bg-slate-100 active:bg-slate-500'
+                                : 'text-slate-700 hover:text-slate-200 hover:bg-slate-600 active:bg-slate-700'
+                        }   active:scale-90 
+                        select-none transition-all ease-in-out duration-300`}
                         onClick={handleCharacterClick}
                     >
                         <img
