@@ -6,12 +6,22 @@ const GameContext = createContext();
 const GameProvider = ({ children }) => {
     const [isGame, setIsGame] = useState(false);
     const [gameCharacters, setGameCharacters] = useState([]);
+    const [gameTime, setGameTime] = useState(0); // New state to hold the game time
 
     const changeIsGame = (value) => setIsGame(value);
 
+    const updateGameTime = (time) => setGameTime(time); // Method to update gameTime
+
     return (
         <GameContext.Provider
-            value={{ isGame, changeIsGame, gameCharacters, setGameCharacters }}
+            value={{
+                isGame,
+                changeIsGame,
+                gameCharacters,
+                setGameCharacters,
+                gameTime,
+                updateGameTime,
+            }}
         >
             {children}
         </GameContext.Provider>
