@@ -2,17 +2,21 @@ import moonIcon from '../../assets/icons/night.png';
 import sunIcon from '../../assets/icons/sun.png';
 import useTheme from '../../hooks/useTheme';
 import useGame from '../../hooks/useGame';
+import StopWatch from '../time/StopWatch';
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();
     const { isGame, gameCharacters } = useGame();
 
     return (
+        // header main container
         <div
-            className={`z-50 sticky top-0 flex items-center place-content-between px-16 min-h-16 transition-colors ease-in-out duration-300 ${
-                theme === 'dark' ? 'bg-slate-700' : 'bg-slate-200'
-            } max-sm:flex-col max-sm:py-4 max-sm:gap-4`}
+            className={`select-none z-50 sticky top-0 flex items-center place-content-between 
+                px-16 min-h-16 transition-colors ease-in-out duration-300 ${
+                    theme === 'dark' ? 'bg-slate-700' : 'bg-slate-200'
+                } max-sm:flex-col max-sm:py-4 max-sm:gap-4`}
         >
+            {/* app logo that navigates back to home */}
             <a
                 href="/"
                 id="back-logo"
@@ -33,7 +37,14 @@ const Header = () => {
                     </span>
                 </div>
             </a>
+
+            {/* Stop watch */}
+            {isGame && <StopWatch isGame={isGame} theme={theme} />}
+
+            {/* leaderboard/game characters and toggle theme button container */}
             <div className="flex items-center gap-5 max-sm:flex-col max-sm:gap-4">
+                {/* displaying of leaderboard if game not started, 
+                otherwise display game characters which to find */}
                 {!isGame ? (
                     <a
                         href="/leaderboard"
@@ -72,6 +83,7 @@ const Header = () => {
                     )
                 )}
 
+                {/* displaying toggle theme button */}
                 <div
                     onClick={toggleTheme}
                     className={`cursor-pointer border-2 p-2 rounded-lg transition-colors ease-in-out duration-300 ${
