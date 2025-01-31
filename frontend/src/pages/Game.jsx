@@ -6,9 +6,10 @@ import gamesData from '../gameData';
 import { handleImageCoords } from '../js/handleImage';
 import Circle from '../components/Circle';
 import CharactersDisplay from '../components/CharactersDisplay';
+import NotFound from '../components/popup/NotFound';
 
 const Game = () => {
-    const { changeIsGame, gameCharacters, setGameCharacters } = useGame();
+    const { changeIsGame, setGameCharacters } = useGame();
     const { gameId } = useParams();
     const [circleVisible, setCircleVisible] = useState(false);
     const [coordinates, setCoordinates] = useState({ x: 0, y: 0 }); // normalized coordinates
@@ -53,7 +54,6 @@ const Game = () => {
                         <>
                             <Circle coordinates={coordinates} imgRef={imgRef} />
                             <CharactersDisplay
-                                characters={gameCharacters}
                                 coordinates={coordinates}
                                 imgRef={imgRef}
                             />
@@ -61,7 +61,7 @@ const Game = () => {
                     )}
                 </div>
             ) : (
-                <h1 className="text-2xl font-bold">Game not found</h1>
+                <NotFound />
             )}
         </Layout>
     );
