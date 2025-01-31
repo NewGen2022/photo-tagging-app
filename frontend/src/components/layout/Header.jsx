@@ -62,13 +62,45 @@ const Header = () => {
                             {gameCharacters.map((character) => (
                                 <div
                                     key={character.name}
-                                    className="text-center flex items-center gap-1 max-sm:flex-col"
+                                    className="text-center flex items-center gap-1 max-sm:flex-col relative"
                                 >
-                                    <img
-                                        src={character.image}
-                                        alt={character.name}
-                                        className="w-[40px] h-[40px] rounded-md transform transition-transform duration-300 hover:scale-105"
-                                    />
+                                    {/* Character Image with Red Cross Overlay */}
+                                    <div className="relative w-[40px] h-[40px]">
+                                        <img
+                                            src={character.image}
+                                            alt={character.name}
+                                            className="w-full h-full rounded-md transform transition-transform duration-300 hover:scale-105"
+                                        />
+                                        {character.found && (
+                                            <div className="absolute inset-0 flex items-center justify-center bg-rose-900 bg-opacity-70 rounded-md">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    className="w-6 h-6 text-rose-500"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                >
+                                                    <line
+                                                        x1="18"
+                                                        y1="6"
+                                                        x2="6"
+                                                        y2="18"
+                                                    />
+                                                    <line
+                                                        x1="6"
+                                                        y1="6"
+                                                        x2="18"
+                                                        y2="18"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Character Name */}
                                     <div
                                         className={`${
                                             theme === 'light' &&
