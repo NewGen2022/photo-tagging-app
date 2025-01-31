@@ -1,11 +1,12 @@
-import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import useGame from '../../hooks/useGame';
 import { formatTime } from '../../js/time';
+import useTheme from '../../hooks/useTheme';
 
-const StopWatch = ({ theme }) => {
+const StopWatch = () => {
     const { isGame, gameTime, updateGameTime } = useGame(); // Access context
     const [elapsedTime, setElapsedTime] = useState(gameTime); // Sync with gameTime from context
+    const { theme } = useTheme();
 
     // Start the timer automatically when isGame is true
     useEffect(() => {
@@ -39,10 +40,6 @@ const StopWatch = ({ theme }) => {
             {formatTime(elapsedTime)}
         </div>
     );
-};
-
-StopWatch.propTypes = {
-    theme: PropTypes.string.isRequired,
 };
 
 export default StopWatch;
