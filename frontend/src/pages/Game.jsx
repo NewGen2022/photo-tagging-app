@@ -28,9 +28,8 @@ const Game = () => {
     useEffect(() => {
         if (game) {
             setGameCharacters(game.characters);
+            changeIsGame(true);
         }
-
-        changeIsGame(true);
 
         return () => {
             changeIsGame(false);
