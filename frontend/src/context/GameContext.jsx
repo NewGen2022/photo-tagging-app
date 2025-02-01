@@ -7,6 +7,7 @@ const GameProvider = ({ children }) => {
     const [isGame, setIsGame] = useState(false);
     const [gameCharacters, setGameCharacters] = useState([]);
     const [gameTime, setGameTime] = useState(0); // New state to hold the game time
+    const [endGame, setEndGame] = useState(false);
 
     const changeIsGame = (value) => setIsGame(value);
 
@@ -21,6 +22,8 @@ const GameProvider = ({ children }) => {
                 setGameCharacters,
                 gameTime,
                 updateGameTime,
+                endGame,
+                setEndGame,
             }}
         >
             {children}
