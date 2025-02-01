@@ -64,8 +64,9 @@ const EndOfGame = () => {
                         className="border-2 border-slate-500 p-1 px-3 rounded w-full mt-1 focus:outline-cyan-400 transition-all duration-200 ease-in-out"
                         required
                     />
+
                     <input name="time" type="hidden" value={gameTime} />
-                    <input name="gameId" type="hidden" value={gameId} />
+
                     <div className="text-xs">
                         *If you do not submit form, result won&apos;t be saved
                     </div>
