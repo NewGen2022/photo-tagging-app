@@ -4,12 +4,11 @@ import { placeItem, moveItem } from '../js/handlePosition';
 import useTheme from '../hooks/useTheme';
 import debounce from 'lodash.debounce';
 import useGame from '../hooks/useGame';
-import { formatTime } from '../js/time';
 import Success from './popup/Success';
 import Failure from './popup/Failure';
 
 const CharactersDisplay = ({ coordinates, imgRef }) => {
-    const { changeIsGame, gameTime, gameCharacters, setGameCharacters } =
+    const { changeIsGame, gameCharacters, setGameCharacters, setEndGame } =
         useGame();
     const { theme } = useTheme();
     const charactersRef = useRef(null);
@@ -115,7 +114,7 @@ const CharactersDisplay = ({ coordinates, imgRef }) => {
 
             // Preserve translateX and only adjust translateY
             setCharacterBoardPosition((prevState) => {
-                if (numCharacters === 1) {
+                if (numCharacters === 1 || numCharacters === 0) {
                     return {
                         translateX: prevState.translateX, // Keep previous translateX
                         translateY: '-translate-y-20', // smaller gap for one character
@@ -141,8 +140,7 @@ const CharactersDisplay = ({ coordinates, imgRef }) => {
     // check if all characters are found
     useEffect(() => {
         if (allCharactersFound) {
-            console.log('All characters have been found!');
-            console.log(formatTime(gameTime));
+            setEndGame(true);
             changeIsGame(false);
         }
     }, [allCharactersFound]);
