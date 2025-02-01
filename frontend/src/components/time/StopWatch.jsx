@@ -5,31 +5,23 @@ import useTheme from '../../hooks/useTheme';
 
 const StopWatch = () => {
     const { isGame, gameTime, updateGameTime } = useGame(); // Access context
-    const [elapsedTime, setElapsedTime] = useState(gameTime); // Sync with gameTime from context
+    const [elapsedTime, setElapsedTime] = useState(gameTime * 1000); // Convert to milliseconds
     const { theme } = useTheme();
 
-    // Start the timer automatically when isGame is true
     useEffect(() => {
         if (isGame) {
+            const startTime = performance.now() - elapsedTime; // Track time accurately
             const timerID = setInterval(() => {
-                setElapsedTime((prevTime) => {
-                    const newTime = prevTime + 1;
-                    return newTime; // Update the local state first
-                });
-            }, 1000);
+                setElapsedTime(performance.now() - startTime);
+            }, 10); // Update every 10ms
 
-            // Update gameTime in context when elapsedTime changes
-            const timeInterval = setInterval(() => {
-                updateGameTime(elapsedTime); // Update context with elapsedTime
-            }, 1000);
-
-            // Clean up the interval and log time when the game ends
-            return () => {
-                clearInterval(timerID);
-                clearInterval(timeInterval); // Clear context update interval
-            };
+            return () => clearInterval(timerID);
         }
-    }, [isGame, elapsedTime, updateGameTime]);
+    }, [isGame]);
+
+    useEffect(() => {
+        updateGameTime(elapsedTime / 1000); // Convert back to seconds for context
+    }, [elapsedTime, updateGameTime]);
 
     return (
         <div
@@ -37,7 +29,7 @@ const StopWatch = () => {
                 theme === 'dark' ? 'text-slate-200' : 'text-slate-600'
             }`}
         >
-            {formatTime(elapsedTime)}
+            {formatTime(elapsedTime / 1000)} {/* Convert back to seconds */}
         </div>
     );
 };
