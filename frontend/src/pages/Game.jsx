@@ -7,9 +7,10 @@ import { handleImageCoords } from '../js/handleImage';
 import Circle from '../components/Circle';
 import CharactersDisplay from '../components/CharactersDisplay';
 import NotFound from '../components/popup/NotFound';
+import EndOfGame from '../components/EndOfGame';
 
 const Game = () => {
-    const { changeIsGame, setGameCharacters } = useGame();
+    const { changeIsGame, setGameCharacters, endGame, setEndGame } = useGame();
     const { gameId } = useParams();
     const [circleVisible, setCircleVisible] = useState(false);
     const [coordinates, setCoordinates] = useState({ x: 0, y: 0 }); // normalized coordinates
@@ -33,12 +34,15 @@ const Game = () => {
 
         return () => {
             changeIsGame(false);
+            setEndGame(false);
             setGameCharacters([]);
         };
     }, [game, setGameCharacters]);
 
     return (
         <Layout>
+            {endGame && <EndOfGame />}
+
             {game ? (
                 <div>
                     <img
