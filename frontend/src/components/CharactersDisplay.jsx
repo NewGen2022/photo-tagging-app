@@ -140,6 +140,7 @@ const CharactersDisplay = ({ coordinates, imgRef }) => {
     // check if all characters are found
     useEffect(() => {
         if (allCharactersFound) {
+            document.body.style.overflow = 'hidden'; // Disable scrolling
             setEndGame(true);
             changeIsGame(false);
         }
