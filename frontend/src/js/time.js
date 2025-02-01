@@ -2,18 +2,23 @@
 const formatTime = (time) => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
-    const seconds = time % 60;
+    const seconds = Math.floor(time % 60);
+    const milliseconds = Math.floor((time * 1000) % 1000); // Extract milliseconds
+
     return `${hours.toString().padStart(2, '0')}:${minutes
         .toString()
-        .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds
+        .toString()
+        .padStart(3, '0')}`; // Always display 3-digit milliseconds
 };
 
 const formatEndTime = (time) => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
-    const seconds = time % 60;
+    const seconds = Math.floor(time % 60);
+    const milliseconds = (time % 1).toFixed(3).slice(2); // Extract milliseconds, rounded to 3 decimal places
 
-    // Determine the correct word based on the largest non-zero unit
+    // Determine the correct unit (hours, minutes, or seconds)
     let unit = 'seconds';
     if (hours > 0) {
         unit = hours === 1 ? 'hour' : 'hours';
@@ -21,13 +26,14 @@ const formatEndTime = (time) => {
         unit = minutes === 1 ? 'minute' : 'minutes';
     }
 
+    // Format time components
     const timeParts = [];
     if (hours > 0) timeParts.push(String(hours).padStart(2, '0'));
     if (minutes > 0 || hours > 0)
         timeParts.push(String(minutes).padStart(2, '0'));
-    timeParts.push(seconds);
+    timeParts.push(String(seconds).padStart(2, '0')); // Ensure two-digit seconds
 
-    return `${timeParts.join(':')} ${unit}`;
+    return `${timeParts.join(':')}.${milliseconds} ${unit}`;
 };
 
 export { formatTime, formatEndTime };
