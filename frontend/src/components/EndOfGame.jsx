@@ -23,7 +23,7 @@ const EndOfGame = () => {
                     },
                     body: new URLSearchParams({
                         username,
-                        time: gameTime,
+                        time: gameTime.toFixed(3),
                         gameId,
                     }),
                 }
