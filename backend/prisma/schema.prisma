@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Leaderboard {
+  id       String @id @default(uuid())
+  username String
+  time     Float
+  gameId   String
+}
