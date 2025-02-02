@@ -7,9 +7,18 @@ const getUserTimeDB = async (gameId) => {
 };
 
 // POST QUERIES
-const postUserTimeDB = async (gameId, time, username) => {
-    console.log(gameId, time, username);
-    return true;
+const postUserTimeDB = async (username, time, gameId) => {
+    if (!gameId) throw new Error('GameId is missing');
+    if (!time) throw new Error('Time is missing');
+    if (!username) throw new Error('Username is missing');
+
+    try {
+        return await prisma.leaderboard.create({
+            data: { username, time, gameId },
+        });
+    } catch (err) {
+        throw new Error('Error adding user time: ' + err.message);
+    }
 };
 
 module.exports = { getUserTimeDB, postUserTimeDB };
