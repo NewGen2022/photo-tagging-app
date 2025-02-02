@@ -2,8 +2,18 @@ const prisma = require('./prismaClient');
 
 // GET QUERIES
 const getUserTimeDB = async (gameId) => {
-    console.log(gameId);
-    return;
+    if (!gameId) throw new Error('gameId is missing');
+
+    try {
+        return await prisma.leaderboard.findMany({
+            where: { gameId: gameId },
+        });
+    } catch (err) {
+        throw new Error(
+            `Error getting leaderboard for game with id ${gameId}: ` +
+                err.message
+        );
+    }
 };
 
 // POST QUERIES
