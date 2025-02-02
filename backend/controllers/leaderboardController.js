@@ -1,8 +1,18 @@
 const { getUserTimeDB, postUserTimeDB } = require('../db/queries');
 
 const getUsersTime = async (req, res) => {
-    console.log(req.body);
-    // getUserTimeDB(gameId);
+    const { gameId } = req.query;
+
+    try {
+        // successfully get time for game
+        const leaderboard = await getUserTimeDB(gameId);
+        return res.status(200).json(leaderboard);
+    } catch (err) {
+        // error occurred getting game time
+        return res
+            .status(500)
+            .json({ error: err.message || 'Internal Server Error' });
+    }
 };
 
 const postUserTime = async (req, res) => {
