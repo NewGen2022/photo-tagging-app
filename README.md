@@ -15,6 +15,7 @@ The assignment was to create a photo tagging app as Where`s Waldo with leaderboa
 - PostgreSQL: Serves as the relational database to store leaderboard data.
 - Prisma ORM: Provides an Object-Relational Mapping approach for interacting with the PostgreSQL database.
 - TainwindCss: Enhances the visual appeal and styling of the frontend.
+
 (For deploying you can use railway.app and for cloud storage of game images use supabase or analogies (at your own request)) 
 - railway.app: A platform for deploying the full-stack application.
 - supabase: Acts as the cloud storage provider for securely managing user-uploaded files.
@@ -28,6 +29,16 @@ After that, the user can view the leaderboard for each game on the leaderboard p
 
 There are two themes available: dark and light. Also app is responsive to any screen size.
 
+## For developers
+
+To run the app on a local machine, clone the repository and follow these steps:
+1. Open in VS code (or another preferred code editor) two consoles
+2. In first run `cd /frontend` -> `npm run dev`
+3. In second run `cd /backend` -> `npm run dev`
+
+To add new games use file `/frontend/src/gameData.js` (add all needed information as used in original code)
+
+Contribute🚀 and enjoy🎉
 
 # App preview
 ![app preview](https://github.com/NewGen2022/photo-tagging-app/blob/main/app_preview/photo-1.png)
