@@ -7,6 +7,7 @@ const getUserTimeDB = async (gameId) => {
     try {
         return await prisma.leaderboard.findMany({
             where: { gameId: gameId },
+            orderBy: { time: 'asc' },
         });
     } catch (err) {
         throw new Error(
