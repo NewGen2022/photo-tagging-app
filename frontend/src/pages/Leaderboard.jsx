@@ -130,7 +130,9 @@ const Leaderboard = () => {
                             theme === 'dark' ? '' : 'text-slate-600 font-bold'
                         }`}
                     >
-                        No leaderboard data yet
+                        {activeGameId
+                            ? 'No leaderboard data yet'
+                            : 'Select game to see leaderboard'}
                     </div>
                 )}
             </div>
