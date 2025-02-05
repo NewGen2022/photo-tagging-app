@@ -2,6 +2,7 @@ import Layout from '../components/layout/Layout';
 import gamesData from '../gameData';
 import { useState } from 'react';
 import useTheme from '../hooks/useTheme';
+import { formatLeaderboardTime } from '../js/time';
 
 const Leaderboard = () => {
     const [leaderboard, setLeaderboard] = useState(null);
@@ -86,7 +87,7 @@ const Leaderboard = () => {
                                     Username
                                 </th>
                                 <th className="px-4 py-2 border-b border-slate-700">
-                                    Time (in seconds)
+                                    Time
                                 </th>
                             </tr>
                         </thead>
@@ -118,7 +119,7 @@ const Leaderboard = () => {
                                                 : 'bg-slate-300'
                                         }`}
                                     >
-                                        {leader.time}
+                                        {formatLeaderboardTime(leader.time)}
                                     </td>
                                 </tr>
                             ))}
