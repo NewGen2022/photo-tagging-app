@@ -36,4 +36,14 @@ const formatEndTime = (time) => {
     return `${timeParts.join(':')}.${milliseconds} ${unit}`;
 };
 
-export { formatTime, formatEndTime };
+const formatLeaderboardTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    const milliseconds = (time % 1).toFixed(3).slice(2); // Extract milliseconds
+
+    return `${
+        minutes > 0 ? `${minutes} min ` : ''
+    } ${seconds}.${milliseconds} sec`;
+};
+
+export { formatTime, formatEndTime, formatLeaderboardTime };
